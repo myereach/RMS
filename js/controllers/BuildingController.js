@@ -6,8 +6,9 @@ angular.module("rmsApp.controllers")
 		rmsServices.init('classes/Building/cards');
 		rmsServices.getAll().then(function(all){
 			$scope.buildings = all;
+			$scope.displayedCollection = [].concat(all);
 		});
-    	$scope.name = "rmsApp";
+    	//$scope.name = "rmsApp";
 		$scope.$on("updateBuildings", function (event, building) {
     		$scope.buildings.push(building);
         });

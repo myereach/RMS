@@ -3,39 +3,39 @@
  */
 'use strict';
 var $baseUrl="http://192.168.2.61:8080/openmaint/services/rest/v2/";
-
+console.log("test");
 angular.module("rmsApp.services")
     .factory('rmsServices', function(Restangular) {
 
         //var resourceBase = Restangular.all("cards");
         //var service=Restangular.service('classes/Building/cards');
+        var service={};
+        service.itemUrl="";
+        service.init = function(itemUrl){
+            service.itemUrl=itemUrl;
+            console.log("set :"+service.itemUrl)
 
-
-
-        var service=new Object();
-        service._itemUrl="abc";
-        service._service={};
-        service.init=function(itemUrl) {
-            var newone = new Object();
-            newone = service;
-            newone._itemUrl = itemUrl;
-            Restangular.withConfig(function (RestangularConfigurer) {
-                Restangular.setBaseUrl($baseUrl);
-
-                newone._service = Restangular.service(itemUrl);
-
+            //Restangular.setBaseUrl($baseUrl);
+            //service=Restangular.service(service.itemUrl);
+            Restangular.withConfig(function(RestangularConfigurer) {
+                service =  Restangular.setBaseUrl($baseUrl).service(itemUrl);
 
             });
-            return newone;
+            //return service;
+            //service=Restangular.service(itemUrl);
+            /*return Restangular.withConfig(function(RestangularConfigurer) {
+                service =  Restangular.setBaseUrl($baseUrl).service(itemUrl);
+                return service;
+            });*/
         };
         service.getById = function (id) {
             //return  service.one(id).get().$object ;
             //console.log("service.getById");
-            return service._service.one(id).get();
+            return service.one(id).get();
             // return restangular.one("account", id).get();
         };
         service.getAll = function () {
-            return service._service.getList();
+            return service.getList().$object;
             // return restangular.one("account", id).get();.$object
         };
         service.update = function(it) {
@@ -44,8 +44,8 @@ angular.module("rmsApp.services")
             return Restangular.copy(it).put();
         };
         service.create = function(it, callback) {
-            console.log(it);
-            return service._service.post(it).then(function(resp) {
+            console.log(it);　
+            return service.post(it).then(function(resp) {
 
                 callback(resp.data);
 
@@ -60,7 +60,7 @@ angular.module("rmsApp.services")
 
             //return Restangular.copy(user).post();
         };
+        return service;
 
-        return  service;
 
     });

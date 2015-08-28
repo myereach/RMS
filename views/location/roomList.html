@@ -1,6 +1,6 @@
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-	建物管理 <small></small>
+	房間管理 <small></small>
 </h3>
 <div class="page-bar">
 	<ul class="page-breadcrumb">
@@ -14,7 +14,7 @@
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
-			<a href="#/location/buildingList">建物設定</a>
+			<a href="#/location/roomList">房間設定</a>
 		</li>
 	</ul>
 	<div class="page-toolbar">
@@ -63,7 +63,7 @@
 		<div class="portlet box blue-hoki">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-globe"></i>建築物列表
+					<i class="fa fa-globe"></i>房間設定
 				</div>
 				<div class="tools">
 
@@ -71,10 +71,10 @@
 
 			</div>
 			<!--<div>
-				<div ui-grid="{ data: buildings }" class="myGrid"></div>
+				<div ui-grid="{ data: rooms }" class="myGrid"></div>
 			</div>-->
-			<div class="portlet-body" >
-				<table st-table="buildings" class="table table-striped table-bordered table-hover" st-safe-src="displayedCollection" >
+			<div class="portlet-body">
+				<table st-table="rooms" class="table table-striped table-bordered table-hover" id="sample_1" st-safe-src="displayedCollection">
 					<thead>
 					<tr>
 						<th colspan="4">
@@ -90,12 +90,12 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr ng-repeat="building in buildings">
-						<td ><a href="#/location/buildingView/{{building._id}}">{{building.Code}}</a></td>
-						<td>{{building.Name}}</td>
-						<td>{{building.Description}}</td>
+					<tr ng-repeat="room in rooms">
+						<td ><a href="#/location/roomView/{{room._id}}">{{room.Code}}</a></td>
+						<td>{{room.Name}}</td>
+						<td>{{room.Description}}</td>
 						<td>
-							<a href="#/location/buildingUpdate/{{building._id}}"><button type="button" class="btn btn-success" >編輯</button></a>
+							<a href="#/location/roomUpdate/{{room._id}}"><button type="button" class="btn btn-success" >編輯</button></a>
 							&nbsp;&nbsp;
 							<!--<button type="button" class="btn btn-warning" ng-click="remove($index)">刪除</button>-->
 							<button type="button" class="btn btn-warning"  ng-click="remove($index)">刪除</button>
@@ -105,12 +105,12 @@
 					<tfoot>
 					<tr>
 						<td colspan="4" class="text-center">
-							<div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div><!--st-displayed-pages="3"-->
+							<div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
 						</td>
 					</tr>
 					</tfoot>
 				</table>
-				<center><a href="#/location/buildingAdd"><button type="button" class="btn btn-primary" >新增</button></a></center>
+				<center><a href="#/location/roomAdd"><button type="button" class="btn btn-primary" >新增</button></a></center>
 			</div>
 
 		</div>

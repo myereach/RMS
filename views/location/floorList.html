@@ -74,7 +74,7 @@
 				<div ui-grid="{ data: floors }" class="myGrid"></div>
 			</div>-->
 			<div class="portlet-body">
-				<table st-table="floors" class="table table-striped table-bordered table-hover" id="sample_1">
+				<table st-table="floors" class="table table-striped table-bordered table-hover" id="sample_1" st-safe-src="displayedCollection">
 					<thead>
 					<tr>
 						<th colspan="4">
@@ -83,7 +83,7 @@
 
 					</tr>
 					<tr>
-						<th>Code</th>
+						<th st-sort="Code" st-sort-default="true">Code</th>
 						<th>Name</th>
 						<th>Description</th>
 						<th>Operation</th>
@@ -105,7 +105,7 @@
 					<tfoot>
 					<tr>
 						<td colspan="4" class="text-center">
-							<div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+							<div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
 						</td>
 					</tr>
 					</tfoot>

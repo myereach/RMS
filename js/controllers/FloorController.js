@@ -7,6 +7,7 @@ angular.module("rmsApp.controllers")
 		rmsServices.init('classes/Floor/cards');
 		rmsServices.getAll().then(function(all){
 			$scope.floors = all;
+			$scope.displayedCollection = [].concat(all);
 		});
     	$scope.name = "RMS";
 		$scope.$on("updateFloors", function (event, floor) {
@@ -35,56 +36,45 @@ angular.module("rmsApp.controllers")
 		});
     })
     .controller("FloorAddController", function($rootScope, $scope, $location, rmsServices){
-		var Buildings = rmsServices.init('classes/Building/cards');
-		var Floors = rmsServices.init('classes/Floor/cards');
+		rmsServices.init('classes/Building/cards');
+		rmsServices.getAll().then(function(all){
+			$scope.buildings=all;//console.log(JSON.stringify(all));
+		});
+		rmsServices.init('classes/Floor/cards');
 		$scope.func = "add";
     	$scope.add = function(){
-    		var floor={};//= new Floor();
-			floor=$scope.floor;
-			Floors.create(floor,function(id){
+    		var floor=$scope.floor;
+			rmsServices.create(floor,function(id){
 				$location.path("/location/floorList");
     		});
     	};
     })
     .controller("FloorUpdateController", function($scope, $stateParams, $location, rmsServices){
-		rmsServices.init('classes/Building/cards');
-		var Buildings =rmsServices;
-		rmsServices.init('classes/Floor/cards');
-		var Floors = rmsServices;
-		rmsServices.init('domains/BuildingFloor/relations');
-		var BuildingFloorRelations = rmsServices;
 
 		$scope.func = "update";
-		console.log(Buildings.itemUrl);
-
-		console.log(Floors.itemUrl);
-		//console.log(Buildings.itemUrl);
-		console.log(BuildingFloorRelations.itemUrl);
-		Floors.getById($stateParams.id).then(function(floor){
-			Buildings.getById(floor.Building).then(function(building){
+		rmsServices.init('classes/Floor/cards');
+		rmsServices.getById($stateParams.id).then(function(floor){
+			rmsServices.init('classes/Building/cards');
+			rmsServices.getById(floor.Building).then(function(building){
 				$scope.floor = floor;
+				console.log(floor);
 			});
 		}) ;
-		Buildings.getAll().then(function(all){
+		rmsServices.init('classes/Building/cards');
+		rmsServices.getAll().then(function(all){
 			$scope.buildings=all;
 		});
 
 			$scope.update = function(){
 				//console.log(JSON.stringify($scope.floor.myBuilding));
-				BuildingFloorRelations.getAll().then(function(buildingFloorRelations){
-					for (i = 0; i < buildingFloorRelations.length; i++) {
-						console.log(buildingFloorRelations[i]._destinationId+"=="+$scope.floor._id);
-						if(buildingFloorRelations[i]._destinationId==$scope.floor._id){
-							console.log("get it"+JSON.stringify(buildingFloorRelations[i]));
-							buildingFloorRelations[i]._sourceId=$scope.floor.newBuilding;
-							//BuildingFloorRelations.update(buildingFloorRelations[i]).then(function(){
+				//rmsServices.init('domains/BuildingFloor/relations');
+				//rmsServices.getAll().then(function(buildingFloorRelations){
+					rmsServices.init('classes/Floor/cards');
+					rmsServices.update($scope.floor).then(function(){
+						$location.path("/location/floorList");
+					});
 
-									Floors.update($scope.floor).then(function(){
-										$location.path("/location/floorList");
-									});
-						}
-					}
-				});
+				//});
 
 			};
 

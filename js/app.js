@@ -219,8 +219,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider
                             'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
                             'assets/global/plugins/select2/select2.min.js',
                             'assets/global/plugins/datatables/all.min.js',
-
-
                             'js/scripts/table-advanced2.js'
                         ]
 
@@ -307,6 +305,41 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider
             templateUrl: "views/location/floorUpdate.html",
             data: {pageTitle: 'Floor Setting'},
             controller: "FloorAddController",
+            resolve: {
+
+            }
+        })
+        // location>room
+        .state('app.roomList', {
+            url: "/location/roomList",
+            templateUrl: "views/location/roomList.html",
+            controller: "RoomListController",
+            resolve: {
+
+            }
+        })
+        .state('app.roomUpdate', {
+            url: "/location/roomUpdate/:id",
+            templateUrl: "views/location/roomUpdate.html",
+            data: {pageTitle: 'Room Setting'},
+            controller: "RoomUpdateController",
+            resolve: {
+
+            }
+        })
+        .state('app.roomView', {
+            url: "/location/roomView/:id",
+            templateUrl: "views/location/roomView.html",
+            data: {pageTitle: 'Room Setting'},
+            controller: "RoomViewController",
+            resolve: {
+            }
+        })
+        .state('app.roomAdd', {
+            url: "/location/roomAdd",
+            templateUrl: "views/location/roomUpdate.html",
+            data: {pageTitle: 'Room Setting'},
+            controller: "RoomAddController",
             resolve: {
 
             }
