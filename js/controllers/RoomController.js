@@ -56,10 +56,10 @@ angular.module("rmsApp.controllers")
 		rmsServices.init('classes/Room/cards');
 		rmsServices.getById($stateParams.id).then(function(room){
 			rmsServices.init('classes/Floor/cards');
-			rmsServices.getById(room.Floor).then(function(floor){
+			//rmsServices.getById(room.Floor).then(function(floor){
 				$scope.room = room;
 				console.log(room);
-			});
+			//});
 		}) ;
 		rmsServices.init('classes/Floor/cards');
 		rmsServices.getAll().then(function(all){

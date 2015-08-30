@@ -98,15 +98,18 @@
 								<span class="help-block"></span>
 							</div>
 						</div>
+						<!--<option value="">請選擇</option>
+                                                            <option ng-repeat="floor in floors" value="{{floor._id}}">{{floor.Name}}</option>-->
 
 						<div class="form-group">
 							<label class="col-md-3 control-label">所屬樓地板</label>
 							<div class="col-md-9">
-
-								<select ui-select2 ng-model="room.Floor" data-placeholder="Pick a number" theme="bootstrap">
-									<option value="">請選擇</option>
-									<option ng-repeat="floor in floors" value="{{floor._id}}">{{floor.Name}}</option>
-								</select>
+								<ui-select ng-model="room.Floor">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.Name}}</ui-select-match>
+									<ui-select-choices repeat="floor._id as floor in floors | filter: $select.search">
+										<div ng-bind-html="floor.Name | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
 							</div>
 						</div>
 					</div>

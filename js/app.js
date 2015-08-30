@@ -9,9 +9,9 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap",
     "oc.lazyLoad",  
     "ngSanitize",
+    'ui.select',
     'rmsApp.services',
     'rmsApp.controllers',
-
     'smart-table',
     'restangular'
 ]); 
@@ -213,11 +213,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider
                         name: 'MetronicApp',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                         files: [
-                            'assets/global/plugins/select2/select2.css',
+                            //'assets/global/plugins/select2/select2.css',
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
                             'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
                             'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
                             'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
-                            'assets/global/plugins/select2/select2.min.js',
+                            //'assets/global/plugins/select2/select2.min.js',
                             'assets/global/plugins/datatables/all.min.js',
                             'js/scripts/table-advanced2.js'
                         ]

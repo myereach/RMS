@@ -102,11 +102,13 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">所屬建物</label>
 							<div class="col-md-9">
-
-								<select ui-select2 ng-model="floor.Building" data-placeholder="Pick a number" theme="bootstrap">
-									<option value="">請選擇</option>
-									<option ng-repeat="building in buildings" value="{{building._id}}">{{building.Name}}</option>
-								</select>
+								<ui-select ng-model="floor.Building">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.Name}}</ui-select-match>
+									<ui-select-choices repeat="building._id as building in buildings | filter: $select.search">
+										<div ng-bind-html="building.Name | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+								
 							</div>
 						</div>
 					</div>
