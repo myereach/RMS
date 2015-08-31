@@ -26,14 +26,7 @@ angular.module("rmsApp.controllers", []).controller('LoginModalController', func
                 //$scope.$dismiss;
             //}
         });
-        /*if(username=='admin' && password=='admin') {
-            var user={username:'admin', password:'password'};
-            $scope.$close(user);
-            //$scope.$dismiss;
-        }*/
-       /* UsersApi.login(email, password).then(function (user) {
-            $scope.$close(user);
-        });*/
+
     };
 
 });

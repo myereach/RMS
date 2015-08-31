@@ -778,9 +778,12 @@ MetronicApp.run(["$rootScope", "settings", "$state",  "LoginModal", "Restangular
             // logout function
 
             $rootScope.currentUser=undefined;
-            $scope.error="登入逾時...";
+
             location.reload();
-            return false; // error handled
+            $scope.error="登入逾時...";
+            $rootScope.error="登入逾時...";
+            //location.reload();
+            return true; // error handled
         }else if(response.status === 403) {
             refreshAccesstoken().then(function() {
                 // Repeat the request and then call the handlers the usual way.
@@ -788,7 +791,7 @@ MetronicApp.run(["$rootScope", "settings", "$state",  "LoginModal", "Restangular
                 // Be aware that no request interceptors are called this way.
             });
 
-            return false; // error handled
+            return true; // error handled
         }else if(response.status === 500) {
             //refreshAccesstoken().then(function() {
             // Repeat the request and then call the handlers the usual way.
