@@ -749,7 +749,7 @@ MetronicApp.run(["$rootScope", "settings", "$state",  "LoginModal", "Restangular
 
         console.log ($rootScope.currentUser);
         if( $rootScope!=undefined&&$rootScope.currentUser!=undefined){
-            headers['CMDBuild-Authorization'] =$rootScope.currentUser.token+"A"; //'fdl0qml8knd74vijqatdpvjpeu';
+            headers['CMDBuild-Authorization'] =$rootScope.currentUser.token; //'fdl0qml8knd74vijqatdpvjpeu';
         }
 
 
