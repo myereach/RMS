@@ -54,11 +54,8 @@ angular.module("rmsApp.controllers")
 		$scope.func = "update";
 		rmsServices.init('classes/Floor/cards');
 		rmsServices.getById($stateParams.id).then(function(floor){
-			rmsServices.init('classes/Building/cards');
-			rmsServices.getById(floor.Building).then(function(building){
-				$scope.floor = floor;
-				console.log(floor);
-			});
+			$scope.floor = floor;
+			console.log(floor);
 		}) ;
 		rmsServices.init('classes/Building/cards');
 		rmsServices.getAll().then(function(all){

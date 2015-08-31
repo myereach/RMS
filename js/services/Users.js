@@ -16,8 +16,8 @@ angular.module("rmsApp.services")
         service.create = function(it, callback) {
             return service.post(it).then(function(resp) {
                     console.log("okay", it);
-
-
+                    console.log(resp.data);
+                    return resp.data;
             },
                 function (resp) {
                     console.log("fail", resp.status);

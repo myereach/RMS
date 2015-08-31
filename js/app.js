@@ -99,8 +99,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope','LoginModal', fu
     });
     // logout function
     this.logout = function(){
-        console.log($rootScope.currentUser);
-        console.log($scope.currentUser);
         $rootScope.currentUser=undefined;
         console.log("@scope="+$scope);
         location.reload();
@@ -154,6 +152,7 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
 /* Setup Rounting For All Pages */
 
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', function($stateProvider, $urlRouterProvider, RestangularProvider) {
+
 // MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
      //Restangular setup
    /*var newBaseUrl = "http://192.168.2.61:8080/openmaint/services/rest/v2/";
@@ -165,25 +164,32 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider
         }
         RestangularProvider.setBaseUrl("http://192.168.2.61:8080/openmaint/services/rest/v2/classes/Building");
     */
-        RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig) {
-            headers = headers || {};
-            headers['Content-Type'] = "application/json";
-            headers['CMDBuild-Authorization'] = 'fdl0qml8knd74vijqatdpvjpeu';
+    /*RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig, $rootScope) {
+        headers = headers || {};
+        headers['Content-Type'] = "application/json";
+        console.log("here");
+        console.log (myRootScope);
+        console.log ($rootScope.currentUser);
+        if( $rootScope!=undefined&&$rootScope.currentUser!=undefined){
+            console.log ($rootScope.currentUser.token);
+            headers['CMDBuild-Authorization'] =$rootScope.user.token; //'fdl0qml8knd74vijqatdpvjpeu';
+        }
 
-        });
-        RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, $scope) {
-            if (operation == "getList" || operation == "get" ) {
-                data = data.data;
-            }
-            //console.debug("RETURN from server:");
-            //console.debug(JSON.stringify(data));
-            //console.debug(data);
-            return data;
-        });
+
+    });
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, $scope) {
+        if (operation == "getList" || operation == "get" ) {
+            data = data.data;
+        }
+        //console.debug("RETURN from server:");
+        //console.debug(JSON.stringify(data));
+        //console.debug(data);
+        return data;
+    });
     RestangularProvider.setBaseUrl($baseUrl);
     RestangularProvider.setRestangularFields({
         id: '_id'
-    });
+    });*/
 
 
     // Redirect any unmatched url
@@ -193,18 +199,13 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider
 
 
     $stateProvider
-        // Login
-        .state("login", {
-            url: "/login",
-            templateUrl: "views/login.html",
-            data: {pageTitle: '登入'}
-        })
+
         //root
         .state('app', {
             template: '<ui-view/>',
             // ...
             data: {
-                requireLogin: false // this property will apply to all children of 'app'
+                requireLogin: true // this property will apply to all children of 'app'
             }
             ,
             resolve: {
@@ -742,10 +743,45 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider
 
 //MetronicApp.run(["$rootScope", "settings", "$state",    function($rootScope, settings, $state ) {
 MetronicApp.run(["$rootScope", "settings", "$state",  "LoginModal", "Restangular", function($rootScope, settings, $state,  LoginModal, Restangular) {
-    //console.log(JSON.stringify(Buildings));
-    //console.log(JSON.stringify(LoginModal));
+    Restangular.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig) {
+        headers = headers || {};
+        headers['Content-Type'] = "application/json";
+
+        console.log ($rootScope.currentUser);
+        if( $rootScope!=undefined&&$rootScope.currentUser!=undefined){
+            headers['CMDBuild-Authorization'] =$rootScope.currentUser.token+"A"; //'fdl0qml8knd74vijqatdpvjpeu';
+        }
+
+
+    });
+    Restangular.addResponseInterceptor(function(data, operation, what, url, response, $scope) {
+        if (operation == "getList" || operation == "get" ) {
+            data = data.data;
+        }
+
+        return data;
+    });
+    Restangular.setBaseUrl($baseUrl);
+    Restangular.setRestangularFields({
+        id: '_id'
+    });
+
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
-        if(response.status === 403) {
+        if(response.status === 401) {
+            //refreshAccesstoken().then(function() {
+                // Repeat the request and then call the handlers the usual way.
+
+
+                //$http(response.config).then(responseHandler, deferred.reject);
+                // Be aware that no request interceptors are called this way.
+            //});
+            // logout function
+
+            $rootScope.currentUser=undefined;
+            $scope.error="登入逾時...";
+            location.reload();
+            return false; // error handled
+        }else if(response.status === 403) {
             refreshAccesstoken().then(function() {
                 // Repeat the request and then call the handlers the usual way.
                 $http(response.config).then(responseHandler, deferred.reject);
@@ -770,6 +806,7 @@ MetronicApp.run(["$rootScope", "settings", "$state",  "LoginModal", "Restangular
     });
 
     $rootScope.$state = $state; // state to be accessed from view
+
     // login check
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         console.log("go to State: "+toState.name);
@@ -799,64 +836,7 @@ MetronicApp.run(["$rootScope", "settings", "$state",  "LoginModal", "Restangular
 
 }]);
 
-// for login process
 
-/*MetronicApp.config(function ($httpProvider) {
-
-    $httpProvider.interceptors.push(function ($timeout, $q, $injector) {
-        var LoginModal, $http, $state;
-
-        // this trick must be done so that we don't receive
-        // `Uncaught Error: [$injector:cdep] Circular dependency found`
-        $timeout(function () {
-            LoginModal = $injector.get('LoginModal');
-            $http = $injector.get('$http');
-            $state = $injector.get('$state');
-        });
-
-        return {
-            responseError: function (rejection) {
-                console.log("rejection="+rejection);
-                //console.log("rejection="+JSON.stringify(rejection ));
-                //$scope.showSystemMessage=true;
-                //$scope.systemMessage=rejection.data;
-                //$modal.open({
-                  //  animation: $scope.animationsEnabled,
-                  //  template: rejection.data,
-                  //  size: size
-
-                //});
-                //console.log("rejection="+rejection);
-                if (rejection.status !== 401) {
-                    return rejection;
-                }
-
-                var deferred = $q.defer();
-
-                LoginModal()
-                    .then(function () {
-                        deferred.resolve( $http(rejection.config) );
-                        console.log("here");
-                    })
-                    .catch(function () {
-                        console.log("welcome");
-                        $state.go('dashboard');
-                        deferred.reject(rejection);
-                    });
-
-                return deferred.promise;
-            }
-        };
-    });
-
-});*/
-
-/*MetronicApp.filter('debug', function() {
-    return function(input) {
-        if (input === '') return 'empty string';
-        return input ? input : ('' + input);
-    };
-});*/
 function isPromise(value) {
     if (typeof value.then !== "function") {
         return false;
