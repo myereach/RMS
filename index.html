@@ -62,8 +62,20 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
 <!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
 <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
-<body ng-controller="AppController as AppController" class="page-header-fixed page-sidebar-closed-hide-logo page-quick-sidebar-over-content page-on-load" ng-class="{'page-container-bg-solid': settings.layout.pageBodySolid, 'page-sidebar-closed': settings.layout.pageSidebarClosed}">
+<body id="myBody" ng-controller="AppController as AppController" class="page-header-fixed page-sidebar-closed-hide-logo page-quick-sidebar-over-content page-on-load" >
+<!--<body ng-controller="AppController as AppController" class="page-full-width  page-on-load" ng-class="{'page-container-bg-solid': settings.layout.pageBodySolid, 'page-sidebar-closed': settings.layout.pageSidebarClosed}">-->
+<script>
 
+
+	/*alert(_isMobile);*/
+	/*var app = angular.module("app", []);
+
+	app.controller("MyCtrl", function ($scope) {
+		$scope.data = {};
+		$scope.data.isComputer = !_isMobile;
+		$scope.data.isMobile = _isMobile;
+	});*/
+</script>
 	<!-- BEGIN PAGE SPINNER -->
 	<div ng-spinner-bar class="page-spinner-bar">
 		<div class="bounce1"></div>
@@ -73,7 +85,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- END PAGE SPINNER -->
 
 	<!-- BEGIN HEADER -->
-	<div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top">
+	<div id="myHeader" data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top">
+
 	</div>
 	<!-- END HEADER -->
 
@@ -81,9 +94,11 @@ License: You must have a valid license purchased only from themeforest(the above
 	</div>
 
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container">
+
+	<div class="page-container" >
+
 		<!-- BEGIN SIDEBAR -->
-		<div data-ng-include="'tpl/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper">			
+		<div data-ng-include="'tpl/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper">
 		</div>
 		<!-- END SIDEBAR -->
 
@@ -136,7 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- END CONTAINER -->
 
 	<!-- BEGIN FOOTER -->
-	<div data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer">
+	<div id="myFooter" data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer">
 	</div>
 	<!-- END FOOTER -->
 
@@ -200,11 +215,15 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- END APP LEVEL JQUERY SCRIPTS -->
 
 	<script type="text/javascript">
+
 		/* Init Metronic's core jquery plugins and layout scripts */
 		$(document).ready(function() {   
 			Metronic.init(); // Run metronic theme
-			Metronic.setAssetsPath('/RMS/assets/'); // Set the assets folder path			
+			Metronic.setAssetsPath('/RMS/assets/'); // Set the assets folder path
+
+
 		});
+
 	</script>
 	<!-- END JAVASCRIPTS -->
 </body>

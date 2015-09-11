@@ -2210,7 +2210,8 @@ Page content
   border-radius: 0 !important;
 }
 .page-full-width .page-content {
-  margin-left: 0px !important;
+  /*margin-left: 0px !important; richard*/
+  margin: 0px 0px 0px 0px; !important;
 }
 
 @media (min-width: 992px) {
@@ -2254,7 +2255,8 @@ Page content
     margin-right: 0 !important;
   }
   .page-full-width .page-content-wrapper .page-content {
-    margin-left: 0px !important;
+    /*margin-left: 0px !important; richard*/
+    margin: 0px 0px 0px 0px; !important;
   }
 }
 @media (max-width: 991px) {

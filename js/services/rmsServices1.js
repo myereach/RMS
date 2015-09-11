@@ -2,7 +2,7 @@
  * Created by richard on 2015/8/23.
  */
 'use strict';
-var $baseUrl="http://192.168.2.61:8080/openmaint/services/rest/v2/";
+var $baseUrl="http://220.134.213.206:8082/openmaint/services/rest/v2/";
 console.log("test");
 angular.module("rmsApp.services")
     .factory('rmsServices', function(Restangular) {
