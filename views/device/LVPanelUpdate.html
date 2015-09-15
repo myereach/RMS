@@ -1,0 +1,217 @@
+﻿<!-- BEGIN PAGE HEADER-->
+
+<h3 class="page-title">
+	資產管理 <small></small>
+</h3>
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="#/dashboard.html">Home</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#">低壓配電盤管理</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#/device/LVPanelList">低壓配電盤設定</a>
+		</li>
+	</ul>
+	<div class="page-toolbar">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+			Actions <i class="fa fa-angle-down"></i>
+			</button>
+			<ul class="dropdown-menu pull-right" role="menu">
+				<li>
+					<a href="#">
+					<i class="icon-user"></i> New User </a>
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-basket"></i> New order </a>
+				</li>
+				<li class="divider">
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+	<div class="col-md-6 ">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet box green ">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift"></i> 低壓配電盤設定
+				</div>
+				<div class="tools">
+					<a href="" class="collapse">
+					</a>
+					<!--<a href="#portlet-config" data-toggle="modal" class="config">
+					</a>-->
+					<a href="" class="reload">
+					</a>
+					<a href="" class="remove">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body form" >
+				<form class="form-horizontal" id="myForm" name="myForm" >
+					<div class="form-body">
+						<div class="form-group">
+							<label class="col-md-3 control-label">代碼</label>
+							<div class="col-md-9">
+								<input type="text" name="Code" ng-model="LVPanel.Code" class="form-control" ng-pattern="/^([0-9a-zA-Z]+-?)+[0-9a-zA-Z]+$/" required >
+											<span class="help-block" ng-show="myForm.Code.$invalid">此欄位必填僅可為英數字</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">名稱</label>
+							<div class="col-md-9">
+								<input type="text" name="Name" ng-model="LVPanel.Name" required class="form-control" >
+											<span class="help-block" ng-show="myForm.Name.$invalid">此欄位必填</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">說明</label>
+							<div class="col-md-9">
+								<input type="text" name="Description" ng-model="LVPanel.Description" class="form-control">
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">廠牌</label>
+							<div class="col-md-9">
+								<ui-select ng-model="LVPanel.Manufacturer">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.description}}</ui-select-match>
+									<ui-select-choices repeat="manufacturer._id as manufacturer in manufacturers | filter: $select.search">
+										<div ng-bind-html="manufacturer.description | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">型號</label>
+							<div class="col-md-9">
+								<input type="text" name="ModelData" ng-model="LVPanel.ModelData" class="form-control">
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">重要性</label>
+							<div class="col-md-9">
+								<ui-select ng-model="LVPanel.Criticality">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.description}}</ui-select-match>
+									<ui-select-choices repeat="criticality._id as criticality in criticalities | filter: $select.search">
+										<div ng-bind-html="criticality.description | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">維修廠商</label>
+							<div class="col-md-9">
+								<ui-select ng-model="LVPanel.MaintenanceContractor">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.description}}</ui-select-match>
+									<ui-select-choices repeat="maintenanceContractor._id as maintenanceContractor in maintenanceContractors | filter: $select.search">
+										<div ng-bind-html="maintenanceContractor.description | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">保養週期</label>
+							<div class="col-md-9">
+								<ui-select ng-model="LVPanel.MaintainPeriod">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.description}}</ui-select-match>
+									<ui-select-choices repeat="maintainPeriod._id as maintainPeriod in maintainPeriods | filter: $select.search">
+										<div ng-bind-html="maintainPeriod.description | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">開機時間</label>
+							<div class="col-md-9">
+								<input type="text" name="AcceptanceDate" ng-model="LVPanel.AcceptanceDate" class="form-control">
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">維護保固</label>
+							<div class="col-md-9">
+								<input type="text" name="WarrantyEnd" ng-model="LVPanel.WarrantyEnd" class="form-control">
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">所屬房間</label>
+							<div class="col-md-9">
+								<ui-select ng-model="LVPanel.IsInRoom">
+									<ui-select-match placeholder="請選擇...">{{$select.selected.Name}}</ui-select-match>
+									<ui-select-choices repeat="room._id as room in rooms | filter: $select.search">
+										<div ng-bind-html="room.Name | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-3 col-md-9">
+								<span ng-switch on="func">
+									<span ng-switch-when="update">
+										<button type="button" class="btn green" ng-click="update()" ng-disabled="myForm.$invalid">更新</button>
+									</span>
+									<span ng-switch-default>
+										<button type="button" class="btn green" ng-click="add()" ng-disabled="myForm.$invalid">新增</button>
+									</span>
+								</span>
+
+								<a href="#/device/LVPanelList"><button type="button" class="btn default">返回</button></a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+	<div class="col-md-6 ">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS -->
+<script>
+	//TableAdvanced.init();
+	/*$(function(){
+		alert();
+		//須與form表單ID名稱相同
+		$("#myForm").validate();
+	});*/
+</script>
+<!-- END MAIN JS -->

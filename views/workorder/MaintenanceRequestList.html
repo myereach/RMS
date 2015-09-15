@@ -1,0 +1,132 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+	工單管理 <small></small>
+</h3>
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="#/dashboard.html">Home</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#">工單管理</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#/workorder/MaintenanceRequestList">一般查修</a>
+		</li>
+	</ul>
+	<div class="page-toolbar">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+				Actions <i class="fa fa-angle-down"></i>
+			</button>
+
+
+			<ul class="dropdown-menu pull-right" role="menu">
+				<li>
+					<a href="#">
+						<i class="icon-user"></i> New User </a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-basket"></i> New order </a>
+				</li>
+				<li class="divider">
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+	<div class="col-md-12">
+
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box blue-hoki">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-globe"></i>一般查修
+				</div>
+				<div class="tools">
+
+				</div>
+
+			</div>
+			<!--<div>
+				<div ui-grid="{ data: buildings }" class="myGrid"></div>
+			</div>-->
+			<div class="portlet-body">
+				<table st-table="MaintenanceRequests" class="table table-striped table-bordered table-hover" id="sample_1" st-safe-src="displayedCollection">
+					<thead>
+					<tr>
+						<th colspan="4">
+							<input st-search placeholder="查詢" class="input-sm form-control" type="search"/>
+						</th>
+
+					</tr>
+					<tr>
+						<th>編號</th>
+						<th>說明</th>
+						<th>狀態</th>
+						<th>執行</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="MaintenanceRequest in MaintenanceRequests">
+						<td ><a href="#/workorder/MaintenanceRequestView/{{MaintenanceRequest._id}}">{{MaintenanceRequest.WorkorderCode}}</a></td>
+						<td>{{MaintenanceRequest.Description}}</td>
+						<td>{{MaintenanceRequest.ActivityStatusName}}</td>
+						<td>
+							<span ng-switch on="MaintenanceRequest.RequestStatus">
+									<span ng-switch-when="102"></span>
+								    <span ng-switch-default>
+							<a href="#/workorder/MaintenanceRequestUpdate/{{MaintenanceRequest._id}}"><button type="button" class="btn btn-success" >編輯</button></a>
+							&nbsp;&nbsp;
+							<!--<button type="button" class="btn btn-warning" ng-click="remove($index)">刪除</button>-->
+							<button type="button" class="btn btn-warning"  ng-click="remove($index)">刪除</button>
+									</span>
+							</span>
+						</td>
+					</tr>
+					</tbody>
+					<tfoot>
+					<tr>
+						<td colspan="4" class="text-center">
+							<div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+						</td>
+					</tr>
+					</tfoot>
+				</table>
+				<center><a href="#/workorder/MaintenanceRequestAdd"><button type="button" class="btn btn-primary" >新增</button></a></center>
+			</div>
+
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+
+
+	</div>
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS -->
+<script>
+	//TableAdvanced.init();
+</script>
+<!-- END MAIN JS -->

@@ -1,0 +1,165 @@
+<!-- BEGIN PAGE HEADER-->
+
+<h3 class="page-title">
+    設備管理 <small></small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="#/dashboard.html">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">設備管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#/device/highSensibleHeatDirectEvaporationList">高顯熱冷媒直膨系統主機設定</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+    <div class="col-md-6 ">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet box green ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> 高顯熱冷媒直膨系統主機設定
+                </div>
+                <div class="tools">
+                    <a href="" class="collapse">
+                    </a>
+                    <!--<a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>-->
+                    <a href="" class="reload">
+                    </a>
+                    <a href="" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form" >
+                <form class="form-horizontal" id="myForm" name="myForm" >
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">代碼</label>
+                            <div class="col-md-9"><span class="form-control-static">{{highSensibleHeatDirectEvaporation.Code}}</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">名稱</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.Name}}</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">說明</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.Description}}</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">廠牌</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.ManufacturerName}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">型號</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.ModelData}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">重要性</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.CriticalityName}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">維修廠商</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.MaintenanceContractorName}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">保養週期</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.MaintainPeriodName}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">開機時間</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.AcceptanceDate}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">維護保固</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.WarrantyEnd}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">所屬房間</label>
+                            <div class="col-md-9"><p class="form-control-static">{{highSensibleHeatDirectEvaporation.RoomName}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+
+
+                                <a href="#/device/highSensibleHeatDirectEvaporationList"><button type="button" class="btn default">返回</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+    <div class="col-md-6 ">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>
+
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS -->
+<script>
+    //TableAdvanced.init();
+    /*$(function(){
+     alert();
+     //須與form表單ID名稱相同
+     $("#myForm").validate();
+     });*/
+</script>
+<!-- END MAIN JS -->
